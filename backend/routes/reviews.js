@@ -26,4 +26,32 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req, res) => {
+    Review.findById(req.params.id)
+        .then(review => res.json(review))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').delete((req, res) => {
+    Review.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Review Deleted.'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+    Review.findById(req.params.id)
+        .then(review => {
+            review.username = req.body.username;
+            review.artist = req.body.artist;
+            review.album = req.body.album;
+            review.review = req.body.review;
+
+            review.save()
+                .then(() => res.json('Review Updated!'))
+                .catch(err => res.status(400).json('Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 module.exports = router;
