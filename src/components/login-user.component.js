@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-import { register } from "./user-functions"
+import { login } from './user-functions'
 
-export default class CreateUser extends Component {
+export default class LoginUser extends Component {
 
     constructor(props) {
         super(props);
 
-        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         // use spotify API to somehow extract artists and albums?
         this.state = {
-            username: "",
             email: "",
             password: "",
         }
     }
-    onChangeUsername(e) {
-        this.setState( {
-            username: e.target.value
-        });
-    }
+
     onChangeEmail(e) {
         this.setState( {
             email: e.target.value
@@ -38,32 +32,24 @@ export default class CreateUser extends Component {
         e.preventDefault();
 
         const user = {
-            username: this.state.username,
             email: this.state.email,
             password: this.state.password
         }
 
         console.log(user);
 
-        register(user).then(res => {
-            this.props.history.push(`/user/login`)
+        login(user).then(res => {
+            if(res) {
+                this.props.history.push(`/profile`)
+            }
         })
     }
 
     render() {
         return (
             <div>
-                <h3>Create New User</h3>
+                <h3>Login</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Username: </label>
-                        <input type="text"
-                            required
-                            className="form-control"
-                            value={this.state.username}
-                            onChange={this.onChangeUsername}
-                            />
-                    </div>
                     <div className="form-group">
                         <label>Email: </label>
                         <input type="text"
@@ -83,7 +69,7 @@ export default class CreateUser extends Component {
                             />
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-primary" />
+                        <input type="submit" value="Login" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
