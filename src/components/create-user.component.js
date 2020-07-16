@@ -3,8 +3,8 @@ import { register } from "./user-functions"
 
 export default class CreateUser extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -16,6 +16,7 @@ export default class CreateUser extends Component {
             username: "",
             email: "",
             password: "",
+            errors: {}
         }
     }
     onChangeUsername(e) {
@@ -46,7 +47,7 @@ export default class CreateUser extends Component {
         console.log(user);
 
         register(user).then(res => {
-            this.props.history.push(`/user/login`)
+            this.props.history.push(`/login`)
         })
     }
 

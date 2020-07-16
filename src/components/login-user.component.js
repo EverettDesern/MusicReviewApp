@@ -3,23 +3,24 @@ import { login } from './user-functions'
 
 export default class LoginUser extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
-        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         // use spotify API to somehow extract artists and albums?
         this.state = {
-            email: "",
+            username: "",
             password: "",
+            errors: {}
         }
     }
 
-    onChangeEmail(e) {
+    onChangeUsername(e) {
         this.setState( {
-            email: e.target.value
+            username: e.target.value
         });
     }
     onChangePassword(e) {
@@ -32,7 +33,7 @@ export default class LoginUser extends Component {
         e.preventDefault();
 
         const user = {
-            email: this.state.email,
+            username: this.state.username,
             password: this.state.password
         }
 
@@ -51,12 +52,12 @@ export default class LoginUser extends Component {
                 <h3>Login</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Email: </label>
+                        <label>Username: </label>
                         <input type="text"
                             required
                             className="form-control"
-                            value={this.state.email}
-                            onChange={this.onChangeEmail}
+                            value={this.state.username}
+                            onChange={this.onChangeUsername}
                             />
                     </div>
                     <div className="form-group">

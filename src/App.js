@@ -18,8 +18,8 @@ function App() {
         <Route path = "/" exact component = {ReviewsList} />
         <Route path = "/edit/:id" component = {EditReview} />
         <Route path = "/create" component = {CreateReview} />
-        <Route path = "/user/register" component = {CreateUser} />
-        <Route path = "/user/login" component = {LoginUser} />
+        <Route path = "/register" component = {CreateUser} />
+        <Route path = "/login" component = {LoginUser} />
         <Route path = "/profile" component = {Profile} />
       </div>
     </Router>

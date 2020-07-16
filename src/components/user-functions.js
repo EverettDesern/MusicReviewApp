@@ -18,16 +18,32 @@ export const register = newUser => {
 
 export const login = user => {
     const returningUser = {
-        email: user.email,
+        username: user.username,
         password: user.password
     }
 
     return axios.post('http://localhost:5000/users/login', returningUser)
-    .then(res => {
-        localStorage.setItem("usertoken", res.data);
-        return res.data
-    })
-    .catch(err => {
-        console.log(err);
-    })
+    .then(response => {
+        console.log(response.data);
+        if (typeof response.data === 'string'){
+        localStorage.setItem('usertoken', response.data)
+        } else {
+          console.log("password incorrect");
+        }
+        return response.data
+      })
 }
+
+export const getProfile = user => {
+    return axios
+      .get('users/profile', {
+        //headers: { Authorization: ` ${this.getToken()}` }
+      })
+      .then(response => {
+        console.log(response)
+        return response.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }

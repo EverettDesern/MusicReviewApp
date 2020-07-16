@@ -24,11 +24,12 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/register').post((req, res) => {
+router.post('/register', (req, res) => {
+    const today = new Date();
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const date = req.body.date;
+    const date = today;
 
     const newUser = {
         username,

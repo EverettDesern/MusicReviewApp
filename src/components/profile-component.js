@@ -6,13 +6,16 @@ export default class Profile extends Component {
         super()
         this.state = {
             username: '',
-            email: ''
+            email: '',
+            errors: {}
         }
     }
 
     componentDidMount() {
         const token = localStorage.usertoken
         const decoded = jwt_decode(token)
+        console.log(decoded.username);
+        console.log(decoded.email);
         this.setState({
             username: decoded.username,
             email: decoded.email
